@@ -1,0 +1,21 @@
+START;
+INT x = -1;
+FLOAT j = 1.5;
+INT y = 2 + 5 - 3 + 8 * 4 + x;
+BOOL z = TRUE;
+IF(x >= 0 && y < 3 || z == TRUE){
+    INT b = 10;
+    INT a = 100;
+}
+ELSE{
+    INT c = 5;
+}
+
+WHILE(x != 0){
+    x = x + 1;
+}
+
+OUTPUT x;
+INPUT y;
+
+END;
