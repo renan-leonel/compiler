@@ -16,17 +16,18 @@ BOOLEAN_VALUES: 'TRUE' | 'FALSE';
 
 IDENTIFIER: [a-zA-Z][a-zA-Z0-9]*;
 
-INT_VALUES: ('+' | '-')? ('0' .. '9')+;
-FLOAT_VALUES: ('+' | '-')? ('0' .. '9')+ '.' ('0' .. '9')+;
-
-STRING_VALUES: '"' ( ~["\\] | '\\' . )* '"';
-
 ASSIGNMENT_OP: '='  ;
 ADD_OP: '+' | '-' ;
 MULT_OP: '*' | '**' | '/' | '%' ;
 REL_OP: '>' | '>=' | '<' | '<=' ;
 EQU_OP: '==' | '!=';
 LOGICAL_OP: '&&' | '||';
+SINAL : '+' | '-';
+
+INT_VALUES: ('+' | '-')? ('0' .. '9')+;
+FLOAT_VALUES: ('+' | '-')? ('0' .. '9')+ '.' ('0' .. '9')+;
+
+STRING_VALUES: '"' ( ~["\\] | '\\' . )* '"';
 
 
 WS: (' ' | '\t' | '\r' | '\n') -> skip;

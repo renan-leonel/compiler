@@ -1,21 +1,16 @@
 START;
-INT x = -1;
-FLOAT j = 1.5;
-INT y = 2 + 5 - 3 + 8 * 4 + x;
-BOOL z = TRUE;
-IF(x >= 0 && y < 3 || z == TRUE){
-    INT b = 10;
-    INT a = 100;
-}
-ELSE{
-    INT c = 5;
-}
+INT x = 1;
+INT y = 3;
+INT a = 1 ;
 
-WHILE(x != 0){
+WHILE(x<=y){
+    a = a * x;
     x = x + 1;
+
 }
-
-OUTPUT x;
-INPUT y;
-
+OUTPUT "O fatorial de ";
+OUTPUT y;
+OUTPUT "eh: ";
+OUTPUT a;
+OUTPUT "\n";
 END;

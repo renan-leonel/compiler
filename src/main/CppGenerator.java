@@ -22,7 +22,6 @@ public class CppGenerator extends FCpBaseVisitor<Void> {
         return null;
     }
 
-    //TODO: fazer a  geracao de codigo dos expression visitor
     @Override
     public Void visitDeclaration(FCpParser.DeclarationContext ctx) {
        String varName = ctx.IDENTIFIER().getText();
@@ -106,6 +105,7 @@ public class CppGenerator extends FCpBaseVisitor<Void> {
 
             visitMathTerm(ctx.mathTerm(i+1));
         }*/
+
         outputStr.append(ctx.getText());
 
         return null;
@@ -174,14 +174,17 @@ public class CppGenerator extends FCpBaseVisitor<Void> {
         }
 
         outputStr.append(result);*/
-        outputStr.append(ctx.getText());
+        String exp = new String();
+        exp = ctx.getText().replace("TRUE", "true");
+        exp = exp.replace("FALSE", "false");
+        outputStr.append(exp);
         return null;
     }
 
     @Override
     public Void visitRelTerm(FCpParser.RelTermContext ctx) {
         if(ctx.BOOLEAN_VALUES() != null){
-            outputStr.append(ctx.BOOLEAN_VALUES().getText());
+            outputStr.append(ctx.BOOLEAN_VALUES().getText().toLowerCase());
         }
 
         else if(ctx.mathExp() != null){
@@ -230,7 +233,12 @@ public class CppGenerator extends FCpBaseVisitor<Void> {
         }
 
         if(ctx.outputCmd() != null){
-            outputStr.append("std::cout<<" + ctx.outputCmd().IDENTIFIER() + ";\n");
+            if(ctx.outputCmd().IDENTIFIER() != null){
+                outputStr.append("std::cout<<" + ctx.outputCmd().IDENTIFIER() + ";\n");
+            }else{
+                outputStr.append("std::cout<<" + ctx.outputCmd().STRING_VALUES() + ";\n");
+            }
+
         }
 
         return null;
@@ -239,13 +247,17 @@ public class CppGenerator extends FCpBaseVisitor<Void> {
     @Override
     public Void visitAssignment(FCpParser.AssignmentContext ctx) {
         outputStr.append(ctx.IDENTIFIER().getText() + " = ");
+
         if(ctx.mathExp() != null){
+            System.out.println(ctx.mathExp().getText());
             visitMathExp(ctx.mathExp());
         }
         else if(ctx.relExp() != null){
             visitRelExp(ctx.relExp());
+            System.out.println(ctx.relExp().getText());
         }
         else{
+
             outputStr.append(ctx.STRING_VALUES().getText());
         }
 
